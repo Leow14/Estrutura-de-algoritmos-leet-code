@@ -48,3 +48,19 @@ class DoublyLinkedList:
             self.tail = self.tail.prev
             self.tail.next = None
         return removed_value
+    
+
+
+dll = DoublyLinkedList()
+
+print("pop front (vazia):", dll.remove_from_front())  # None
+print("pop back (vazia):", dll.remove_from_end())    # None
+
+dll.add_to_front(10)     # [10]
+dll.add_to_front(20)     # [20] <-> [10]
+dll.add_to_end(5)       # [20] <-> [10] <-> [5]
+
+print(dll.remove_from_front())  # 20 -> [10] <-> [5]
+print(dll.remove_from_end())   # 5  -> [10]
+print(dll.remove_from_front())  # 10 -> []
+print(dll.remove_from_end())   # None (vazia)
