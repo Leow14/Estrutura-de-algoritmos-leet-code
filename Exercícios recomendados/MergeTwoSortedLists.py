@@ -11,24 +11,29 @@ class Solution(object):
         :type list2: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
-        new_list = ListNode(None)
-        new_list_indicator = None
-        next_node1 = head1.next
-        next_node2 = head2.next
-    
-        ## List1 = head1 || List2 = head2
+
+        tail = ListNode(None)
+        dummy = tail
+
+        if head1 and not head2:
+            return head1
+        elif not head1 and head2:
+            return head2
+        elif not head1 and not head2:
+            return None
+
         while head1 and head2:
-            if head1.value < head2.value:
-                new_list.next = head1
-                new_list_indicator = head1
-                head1.next = head1
-                next_node1 = head1.next
+            if head1 > head2:
+                tail.next = head2
+                head2 = head2.next
             else:
-                new_list.next = head2
-                new_list_indicator = head2
-                head2.next = head2
-                next_node2 = head2.next
+                tail.next = head1
+                head1 = head1.next
+            tail = tail.next
+        
+        if head1:
+            tail.next = head1
+        else:
+            tail.next = head2
 
-        return new_list
-
-
+        return dummy.next

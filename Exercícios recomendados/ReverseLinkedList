@@ -10,7 +10,7 @@ class Solution(object):
         :rtype: Optional[ListNode]
         """
         new_list = None
-
+        
         while head:
             next_node = head.next
             head.next = new_list
