@@ -3,15 +3,16 @@ def bubblesort(arr):
     right = 1
     limit = len(arr)
     while limit >= 1:
-        
+        is_sorted = False
         if arr[left] > arr[right]:
             arr[left], arr[right] = arr[right], arr[left]
 
         left, right = left + 1, right + 1
 
         if right >= len(arr):
+            is_sorted = True
             left, right, limit = 0, 1, limit - 1
-
+        
     return arr
 
     
