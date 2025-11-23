@@ -8,7 +8,6 @@ class Solution(object):
         while num > 0:
             if num%2:
                 num -= 1
-            else:
                 num /= 2
             steps += 1
     

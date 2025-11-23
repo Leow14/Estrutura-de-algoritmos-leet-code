@@ -13,7 +13,6 @@
 # arr = [2, 1, 3, 4, 5]
 
 def bubblesort(arr):
-    
     i = 0
     limit = len(arr)
     is_changed = True
@@ -32,36 +31,38 @@ def bubblesort(arr):
     print(steps)
     return arr
 
-def quicksort(arr):
-    # Definir o pivô
-    # Colocar o pivô na ordem correta
-    # Usar ponteiros para mostrar limitar o novo array 
-    
-    return 0
+def quicksort(arr, low = 0, high = None):
 
-def mergesort(arr):
-    if len(arr) <= 1:
+    i = 0
+    j = 1
+
+    if high is None:
+        high = len(arr) - 1
+
+    if low >= high:
         return arr
 
-    mid = len(arr) // 2
-    left = mergesort(arr[:mid])
-    right = mergesort(arr[mid:])
+    pivot = arr[high]
 
-    return merge(left, right)
+    if arr[i] > pivot and arr[j] < pivot:
+        arr[i], arr[j] = arr[j], arr[i]
+        i, j = i + 1, j + 1
+    elif arr[i] > pivot and arr[j] > pivot:
+        j += 1
+    else:
+        i, j = i + 1, j + 1
+    
+    arr[i] = pivot
 
-def merge(left, right):
-    result = []
-    i = j = 0
+    
 
-    while i < len(left) and j < len(right):
-        if left[i] <= right[j]:
-            result.append(left[i])
-            i += 1
-        else:
-            result.append(right[j])
-            j += 1
+    # Colocar o pivô na ordem correta
+    # Colocar tudo que é menor que o pivô a esquerda do pivô
+    # Mesma coisa para tudo que é maior, que deve ficar a direita
+    # Usar ponteiros para mostrar limitar o novo array
+    # Usar uma lógica recursiva para pegar um novo pivô no sub array
 
-    result.extend(left[i:])
-    result.extend(right[j:])
+    # Quando tivermos 0 ou 1 elementos, quer dizer que ele já está ordenado
+    # Nesse caso, não fazemos nada e "voltamos" para o array
 
-    return result
+    return arr

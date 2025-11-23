@@ -8,7 +8,7 @@ class Solution(object):
         """
         steps = 0
         while num:
-            if num & 1 == 1: # é ímpar
+            if num & 1 == 1:   # é ímpar
                 num -= 1
             else:
                 num >>= 1
