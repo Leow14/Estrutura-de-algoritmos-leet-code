@@ -130,9 +130,9 @@ def print_linked_list(head):
     linked_print = ""
 
     while head:
-        linked_print += str(head.val)
-        head.next
-    print(linked_print)
+        linked_print += ", " + str(head.val) 
+        head = head.next
+    return print(linked_print)
 
 
 node6 = Node(2, None)
@@ -148,4 +148,4 @@ quicksort(arr_teste, 0, len(arr_teste) - 1)
 print(arr_teste)
 
 my_list = mergesort_linked(node1)
-print_linked_list(node1)
+print_linked_list(my_list)
