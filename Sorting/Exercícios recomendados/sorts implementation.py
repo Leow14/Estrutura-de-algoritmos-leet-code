@@ -1,6 +1,6 @@
 # Implementação de todos os sorts vistos em aula:
-# MergeSort
-# QuickSort
+# MergeSort 🆗
+# QuickSort 🆗
 # BubbleSort 🆗
 
 # Exercícios complementares:
@@ -10,7 +10,13 @@
 # https://leetcode.com/problems/relative-sort-array/
 
 
-# arr = [2, 1, 3, 4, 5]
+arr_teste = [2, 8, 7, 5, 3, 1, 15, 12, 4, 9]
+
+#
+#
+# BubbleSort em arrays
+#
+#
 
 def bubblesort(arr):
     i = 0
@@ -31,38 +37,115 @@ def bubblesort(arr):
     print(steps)
     return arr
 
-def quicksort(arr, low = 0, high = None):
+#
+#
+# QuickSort em arrays
+#
+#
 
-    i = 0
-    j = 1
+def quicksort(arr, left, right):
 
-    if high is None:
-        high = len(arr) - 1
+    if left < right:
+        pi = partition(arr, left, right)
+        quicksort(arr, left, pi - 1)
+        quicksort(arr, pi + 1, right)
 
-    if low >= high:
-        return arr
+def partition(arr, left, right):
+    # Não selecionei o pivot da melhor maneira possível
+    pivot = arr[right]
+    # Iniciando o ponteiro "i"
+    i = left - 1
 
-    pivot = arr[high]
+    # Colocando todos os menores que o pivot para a esquerda
+    for j in range(left, right):
+        # Se o valor for menor que o do pivot, o i anda 1, e os ponteiros...
+        # ..."i" + 1 e "j" trocam de lugar
+        if arr[j] <= pivot:
+            i += 1
+            arr[j], arr[i] = arr[i], arr[j]
+    # Chegaremos em um momento em que tudo a esquerda está organizado
+    # E precisamos somente colocar o pivot no lugar certo
+    # Por isso efetuamos a troca de right com i + 1
+    arr[i+1], arr[right] = arr[right], arr[i+1]
+    return i+1
 
-    if arr[i] > pivot and arr[j] < pivot:
-        arr[i], arr[j] = arr[j], arr[i]
-        i, j = i + 1, j + 1
-    elif arr[i] > pivot and arr[j] > pivot:
-        j += 1
+#
+#
+# MergeSort feito em linked lists
+#
+#
+
+class Node:
+    def __init__(self, val = 0, next = None):
+        self.val = val
+        self.next = next
+
+
+def find_middle(head):
+    slow, fast = head, head.next
+
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+
+
+def merge_linked(arr1, arr2):
+    head = Node()
+    tail = head
+
+    while arr1 and arr2:
+        if arr1.val < arr2.val:
+            tail.next = arr1
+            arr1 = arr1.next
+        else:
+            tail.next = arr2
+            arr2 = arr2.next
+        tail = tail.next
+
+    if arr1:
+        tail.next = arr1
     else:
-        i, j = i + 1, j + 1
-    
-    arr[i] = pivot
+        tail.next = arr2
 
-    
+    return head.next
 
-    # Colocar o pivô na ordem correta
-    # Colocar tudo que é menor que o pivô a esquerda do pivô
-    # Mesma coisa para tudo que é maior, que deve ficar a direita
-    # Usar ponteiros para mostrar limitar o novo array
-    # Usar uma lógica recursiva para pegar um novo pivô no sub array
 
-    # Quando tivermos 0 ou 1 elementos, quer dizer que ele já está ordenado
-    # Nesse caso, não fazemos nada e "voltamos" para o array
+def mergesort_linked(head):
+    if not head or not head.next:
+        return head
 
-    return arr
+    middle = find_middle(head)
+    l2 = middle.next
+    middle.next = None
+    left = mergesort_linked(head)
+    right = mergesort_linked(l2)
+
+    return merge_linked(left, right)
+
+
+def print_linked_list(head):
+    # O head obviamente deve ser o head de uma linked list
+
+    linked_print = ""
+
+    while head:
+        linked_print += str(head.val)
+        head.next
+    print(linked_print)
+
+
+node6 = Node(2, None)
+node5 = Node(3, node6)
+node4 = Node(1, node5)
+node3 = Node(8, node4)
+node2 = Node(7, node3)
+node1 = Node(9, node2)
+
+
+print(arr_teste)
+quicksort(arr_teste, 0, len(arr_teste) - 1)
+print(arr_teste)
+
+my_list = mergesort_linked(node1)
+print_linked_list(node1)
