@@ -10,13 +10,12 @@
 # https://leetcode.com/problems/relative-sort-array/
 
 
-arr_teste = [2, 8, 7, 5, 3, 1, 15, 12, 4, 9]
-
 #
 #
 # BubbleSort em arrays
 #
 #
+
 
 def bubblesort(arr):
     i = 0
@@ -43,12 +42,14 @@ def bubblesort(arr):
 #
 #
 
+
 def quicksort(arr, left, right):
 
     if left < right:
         pi = partition(arr, left, right)
         quicksort(arr, left, pi - 1)
         quicksort(arr, pi + 1, right)
+
 
 def partition(arr, left, right):
     # Não selecionei o pivot da melhor maneira possível
@@ -75,8 +76,9 @@ def partition(arr, left, right):
 #
 #
 
+
 class Node:
-    def __init__(self, val = 0, next = None):
+    def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
@@ -127,12 +129,15 @@ def mergesort_linked(head):
 def print_linked_list(head):
     # O head obviamente deve ser o head de uma linked list
 
-    linked_print = ""
-
+    linked_print = "[" + str(head.val)
+    head = head.next
     while head:
-        linked_print += ", " + str(head.val) 
+        linked_print += ", " + str(head.val)
         head = head.next
-    return print(linked_print)
+    linked_print += "]"
+    return (linked_print)
+
+# Criação da linked list
 
 
 node6 = Node(2, None)
@@ -142,10 +147,23 @@ node3 = Node(8, node4)
 node2 = Node(7, node3)
 node1 = Node(9, node2)
 
+quick_arr = [2, 8, 7, 5, 3, 1, 15, 12, 4, 9]
 
-print(arr_teste)
-quicksort(arr_teste, 0, len(arr_teste) - 1)
-print(arr_teste)
+bubble_arr = [5, 6, 1, 2 ,12, 4, 3, 15]
 
+# Testes com todos os sorts
+
+# Teste com quicksort
+print(f"ARRAY ORIGINAL : {quick_arr}")
+quicksort(quick_arr, 0, len(quick_arr) - 1)
+print(f"ARRAY ALTERADO COM QUICKSORT : {quick_arr}")
+
+# Teste com bubblesort
+print(f"ARRAY ORIGINAL : {bubble_arr}")
+bubblesort(bubble_arr)
+print(f"ARRAY ALTERADO COM BUBBLESORT : {bubble_arr}")
+
+# Teste com mergesort
+print(f"LINKED LIST ORIGINAL: {print_linked_list(node1)}")
 my_list = mergesort_linked(node1)
-print_linked_list(my_list)
+print(f"LINKED LIST ALTERADO COM MERGESORT: {print_linked_list(my_list)}")
