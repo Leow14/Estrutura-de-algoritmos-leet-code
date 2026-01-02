@@ -9,6 +9,8 @@ class BinaryTree:
     def __init__(self) -> None:
         self.root = None
 
+# Funções para inserir dados/nodos dentro da árvore
+
     def insert(self, val):
         if self.root is None:
             self.root = Node(val)
@@ -29,7 +31,7 @@ class BinaryTree:
 
     def search(self, val):
         return self._search_recursive(self.root, val)
-  
+
     def _search_recursive(self, node, val):
         if node is None:
             return False
@@ -39,6 +41,46 @@ class BinaryTree:
             return self._search_recursive(node.left, val)
         else:
             return self._search_recursive(node.right, val)
+
+# Funções de transversals recursivas
+    # Funções preorder
+    def preorder_transversal(self):
+        result = []
+
+        self._preorder_recursive(self.root, result)
+        return result
+
+    def _preorder_recursive(self, node, result):
+        if node:
+            result.append(node.val)
+            self._preorder_recursive(node.left, result)
+            self._preorder_recursive(node.right, result)
+    # Funções inorder
+
+    def inorder_transversal(self):
+        result = []
+
+        self._inorder_recursive(self.root, result)
+        return result
+
+    def _inorder_recursive(self, node, result):
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.val)
+            self._inorder_recursive(node.right, result)
+    # Funções postorder
+
+    def postorder_transversal(self):
+        result = []
+
+        self._postorder_recursive(self.root, result)
+        return result
+
+    def _postorder_recursive(self, node, result):
+        if node:
+            self._postorder_recursive(node.left, result)
+            self._postorder_recursive(node.right, result)
+            result.append(node.val)
 
 
 tree = BinaryTree()
@@ -50,3 +92,5 @@ print(tree.search(7))
 print(tree.search(14))
 print(tree.search(10))
 print(tree.search(18))
+
+print(f'preorder: {tree.inorder_transversal()}')
