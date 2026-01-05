@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node:
     def __init__(self, val) -> None:
         self.val = val
@@ -29,7 +32,11 @@ class BinaryTree:
             else:
                 self._insert_recursive(val, node.right)
 
+
+# Funções de busca DFS e BFS
+
     def dfs(self, val):
+
         return self._dfs_recursive(self.root, val)
 
     def _dfs_recursive(self, node, val):
@@ -46,6 +53,24 @@ class BinaryTree:
             return True
         return False
 
+    def bfs(self, val):
+
+        if self.root is None:
+            return False
+
+        queue = deque()
+        queue.append(self.root)
+
+        while queue:
+            node = queue.popleft()
+            print(node.val)
+            if node.val == val:
+                return True
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        return False
 
 # Funções de transversals recursivas
     # Funções preorder
@@ -93,7 +118,7 @@ values_to_insert = [10, 5, 15, 3, 7, 12, 18, 20]
 for val in values_to_insert:
     tree.insert(val)
 
-print(tree.dfs(40))
+print(tree.bfs(7))
 #print(tree.search(14))
 #print(tree.search(10))
 #print(tree.search(18))
