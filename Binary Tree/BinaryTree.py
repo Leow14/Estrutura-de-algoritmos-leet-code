@@ -29,18 +29,23 @@ class BinaryTree:
             else:
                 self._insert_recursive(val, node.right)
 
-    def search(self, val):
-        return self._search_recursive(self.root, val)
+    def dfs(self, val):
+        return self._dfs_recursive(self.root, val)
 
-    def _search_recursive(self, node, val):
+    def _dfs_recursive(self, node, val):
+
         if node is None:
             return False
+
+        print(node.val)
         if node.val == val:
             return True
-        elif val < node.val:
-            return self._search_recursive(node.left, val)
-        else:
-            return self._search_recursive(node.right, val)
+        if self._dfs_recursive(node.left, val):
+            return True
+        if self._dfs_recursive(node.right, val):
+            return True
+        return False
+
 
 # Funções de transversals recursivas
     # Funções preorder
@@ -84,13 +89,13 @@ class BinaryTree:
 
 
 tree = BinaryTree()
-values_to_insert = [10, 5, 15, 3, 7, 12, 18]
+values_to_insert = [10, 5, 15, 3, 7, 12, 18, 20]
 for val in values_to_insert:
     tree.insert(val)
 
-print(tree.search(7))
-print(tree.search(14))
-print(tree.search(10))
-print(tree.search(18))
+print(tree.dfs(40))
+#print(tree.search(14))
+#print(tree.search(10))
+#print(tree.search(18))
 
 print(f'preorder: {tree.inorder_transversal()}')
