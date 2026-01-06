@@ -9,10 +9,10 @@ import collections
 
 class Solution(object):
     def levelOrder(self, root):
-        
+
         q = collections.deque()
         q.append(root)
-        
+
         # [[3], [1, 4], [5]]
         res = []
 
