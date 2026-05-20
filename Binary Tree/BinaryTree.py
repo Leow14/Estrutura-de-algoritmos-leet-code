@@ -85,8 +85,8 @@ class BinaryTree:
             result.append(node.val)
             self._preorder_recursive(node.left, result)
             self._preorder_recursive(node.right, result)
-    # Funções inorder
 
+    # Funções inorder
     def inorder_transversal(self):
         result = []
 
@@ -98,8 +98,8 @@ class BinaryTree:
             self._inorder_recursive(node.left, result)
             result.append(node.val)
             self._inorder_recursive(node.right, result)
-    # Funções postorder
 
+    # Funções postorder
     def postorder_transversal(self):
         result = []
 
