@@ -25,10 +25,6 @@ class Solution:
             
             state[num] = 2
             return False
-            
-
-
-
 
         for i in range(numCourses):
             if has_cycle(i):
